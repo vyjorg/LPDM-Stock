@@ -28,13 +28,15 @@ public class StockController {
     }
 
     @PostMapping(value = "/stocks")
-    public void addStock(@RequestBody Stock stock){
+    public Stock addStock(@RequestBody Stock stock){
 
         Stock stockAdded = stockDao.save(stock);
 
         if (stockAdded.equals(null)){
             System.out.println("Erreur lors de l'ajout");
         }
+
+        return stockAdded;
     }
 
     @DeleteMapping(value="/stocks/{id}")
@@ -43,7 +45,9 @@ public class StockController {
     }
 
     @PutMapping(value="/stocks")
-    public void updateStock(@RequestBody Stock stock){
-        stockDao.save(stock);
+    public Stock updateStock(@RequestBody Stock stock){
+        Stock stockUpdate = stockDao.save(stock);
+
+        return stockUpdate;
     }
 }
