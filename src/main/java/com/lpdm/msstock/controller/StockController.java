@@ -3,9 +3,7 @@ package com.lpdm.msstock.controller;
 import com.lpdm.msstock.dao.StockDao;
 import com.lpdm.msstock.entity.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,9 +21,29 @@ public class StockController {
     }
 
     @GetMapping(value="/stocks/{id}")
-    public Stock findProduct(@PathVariable int id){
+    public Stock findStock(@PathVariable int id){
         Stock stock = stockDao.findById(id);
 
         return stock;
+    }
+
+    @PostMapping(value = "/stocks")
+    public void addStock(@RequestBody Stock stock){
+
+        Stock stockAdded = stockDao.save(stock);
+
+        if (stockAdded.equals(null)){
+            System.out.println("Erreur lors de l'ajout");
+        }
+    }
+
+    @DeleteMapping(value="/stocks/{id}")
+    public void deleteStock(@PathVariable int id){
+        stockDao.deleteById(id);
+    }
+
+    @PutMapping(value="/stocks")
+    public void updateStock(@RequestBody Stock stock){
+        stockDao.save(stock);
     }
 }
