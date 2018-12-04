@@ -1,0 +1,15 @@
+version: '3.5'
+services:
+  ms-stock:
+    image: postgres:alpine
+    ports:
+    - '28186:5432'
+    container_name: LPDM-StockDB
+    environment:
+      POSTGRES_DB: db_stock
+      POSTGRES_USER: usr_stock
+      POSTGRES_PASSWORD: stock
+    volumes:
+    - './sql:/docker-entrypoint-initdb.d'
+    restart: always
+    network_mode: bridge
