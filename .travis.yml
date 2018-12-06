@@ -10,7 +10,7 @@ services:
 
 before_install:
   - cd docker
-  - docker-compose up -d
+  - docker-compose up
   - docker ps -a
 
 before_script:
