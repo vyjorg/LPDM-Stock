@@ -7,6 +7,7 @@ CREATE TABLE public.stock (
                 expire_date TIMESTAMP NOT NULL,
                 packaging VARCHAR NOT NULL,
                 unit_by_package INTEGER NOT NULL,
+                product_id INTEGER NOT NULL,
                 CONSTRAINT stock_pk PRIMARY KEY (id)
 );
 

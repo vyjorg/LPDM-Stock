@@ -23,6 +23,9 @@ public class Stock {
     @Column(name="unit_by_package")
     private Integer unitByPackage;
 
+    @Column(name="product_id")
+    private Integer productId;
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +64,13 @@ public class Stock {
 
     public void setUnitByPackage(Integer unitByPackage) {
         this.unitByPackage = unitByPackage;
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 }
