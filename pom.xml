@@ -95,7 +95,7 @@
 					<container>
 						<useCurrentTimestamp>true</useCurrentTimestamp>
 						<ports>
-							<port>28083</port>
+							<port>28086</port>
 						</ports>
 					</container>
 				</configuration>
