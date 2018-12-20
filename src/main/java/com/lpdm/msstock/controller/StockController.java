@@ -21,7 +21,7 @@ public class StockController {
     }
 
     @GetMapping(value="/stocks/{id}")
-    public Stock findStockByProductor(@PathVariable int id){
+    public Stock findStock(@PathVariable int id){
         Stock stock = stockDao.findById(id);
 
         return stock;
@@ -52,7 +52,7 @@ public class StockController {
     }
 
     @GetMapping(value = "/stocks/productor/{id}")
-    public List<Stock> listStock(@PathVariable int id){
+    public List<Stock> listStockByProductor(@PathVariable int id){
         List<Stock> list = stockDao.findStockByProductId(id);
 
         return list;
