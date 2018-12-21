@@ -31,7 +31,7 @@ pipeline {
             steps {
                 sh 'docker stop LPDM-StockMS || true && docker rm LPDM-StockMS || true'
                 sh 'docker pull vyjorg/lpdm-stock:latest'
-                sh 'docker run -d --name LPDM-StockMS -p 28086:28086 --link LPDM-StockDB --restart always --memory-swappiness=0  -e "JAVA_TOOL_OPTIONS=-Djasypt.encryptor.password==<!+&<" vyjorg/lpdm-stock:latest'
+                sh 'docker run -d --name LPDM-StockMS -p 28086:28086 --link LPDM-StockDB --restart always --memory-swappiness=0  -e vyjorg/lpdm-stock:latest'
             }
         }
     }
