@@ -1,7 +1,7 @@
 package com.lpdm.msstock.entity;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="stock",schema = "public")
@@ -15,7 +15,7 @@ public class Stock {
     private Integer quantity;
 
     @Column(name="expire_date")
-    private LocalDateTime expireDate;
+    private LocalDate expireDate;
 
     @Column
     private String packaging;
@@ -42,11 +42,11 @@ public class Stock {
         this.quantity = quantity;
     }
 
-    public LocalDateTime getExpireDate() {
+    public LocalDate getExpireDate() {
         return expireDate;
     }
 
-    public void setExpireDate(LocalDateTime expireDate) {
+    public void setExpireDate(LocalDate expireDate) {
         this.expireDate = expireDate;
     }
 
