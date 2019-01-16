@@ -26,6 +26,9 @@ public class Stock {
     @Column(name="product_id")
     private Integer productId;
 
+    @Column
+    private String description;
+
     public Integer getId() {
         return id;
     }
@@ -72,5 +75,13 @@ public class Stock {
 
     public void setProductId(Integer productId) {
         this.productId = productId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -8,6 +8,7 @@ CREATE TABLE public.stock (
                 packaging VARCHAR NOT NULL,
                 unit_by_package INTEGER NOT NULL,
                 product_id INTEGER NOT NULL,
+                description VARCHAR NOT NULL,
                 CONSTRAINT stock_pk PRIMARY KEY (id)
 );
 
