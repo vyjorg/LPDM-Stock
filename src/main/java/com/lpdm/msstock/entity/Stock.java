@@ -84,4 +84,17 @@ public class Stock {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Stock{" +
+                "id=" + id +
+                ", quantity=" + quantity +
+                ", expireDate=" + expireDate +
+                ", packaging='" + packaging + '\'' +
+                ", unitByPackage=" + unitByPackage +
+                ", productId=" + productId +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
