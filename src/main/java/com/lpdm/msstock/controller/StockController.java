@@ -70,8 +70,8 @@ public class StockController {
         return stockUpdate;
     }
 
-    @GetMapping(value = "/stocks/producer/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<Stock> listStockByProducerById(@PathVariable int id){
+    @GetMapping(value = "/stocks/product/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<Stock> listStockByProductById(@PathVariable int id){
         log.info("StockController -> méthode listStockByProducerById : entrée ");
         log.info("StockController -> méthode listStockByProducerById : id envoyé = "+id);
         List<Stock> list = stockDao.findStockByProductId(id);
