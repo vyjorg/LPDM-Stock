@@ -98,3 +98,5 @@ INSERT INTO public.stock VALUES (97, 3, '2018-10-22', 'Belarus', 16, 21, 'descri
 INSERT INTO public.stock VALUES (98, 30, '2018-10-22', 'Lesotho', 1, 61, 'description');
 INSERT INTO public.stock VALUES (99, 25, '2018-10-22', 'Montserrat', 5, 23, 'description');
 INSERT INTO public.stock VALUES (100, 3, '2018-10-22', 'Saint Pierre and Miquelon', 10, 41, 'description');
+
+SELECT pg_catalog.setval('public.stock_id_seq', 100, true);
