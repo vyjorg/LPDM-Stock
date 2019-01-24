@@ -3,6 +3,8 @@ package com.lpdm.msstock.controller;
 import com.lpdm.msstock.dao.StockDao;
 import com.lpdm.msstock.entity.Stock;
 import com.lpdm.msstock.exception.StockNotFound;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import javax.validation.Valid;
 import java.util.List;
 
+@Api(description="Controller pour les opérations CRUD sur les stocks.")
 @RestController
 public class StockController {
     private Logger log = LogManager.getLogger(this.getClass());
@@ -19,6 +22,7 @@ public class StockController {
     @Autowired
     private StockDao stockDao;
 
+    @ApiOperation(value = "Récupère tous les stocks de la bdd")
     @GetMapping(value = "/stocks", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Stock> listStock(){
         log.info("StockController -> méthode listStock : entrée ");
@@ -33,6 +37,7 @@ public class StockController {
         return list;
     }
 
+    @ApiOperation(value = "Récupère un stock grâce à son ID si celui-ci existe dans la bdd")
     @GetMapping(value="/stocks/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Stock findStockById(@PathVariable int id){
         log.info("StockController -> méthode findStockById : entrée ");
@@ -48,6 +53,7 @@ public class StockController {
         return stock;
     }
 
+    @ApiOperation(value = "Enregistre un stock si celui-ci est conforme")
     @PostMapping(value = "/stocks", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Stock addStock(@Valid @RequestBody Stock stock){
         log.info("StockController -> méthode addStock : entrée ");
@@ -63,6 +69,7 @@ public class StockController {
         return stockAdded;
     }
 
+    @ApiOperation(value = "Supprime un stock grâce à son ID si celui-ci existe dans la bdd")
     @DeleteMapping(value="/stocks/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void deleteStock(@PathVariable int id){
         log.info("StockController -> méthode deleteStock : entrée ");
@@ -71,6 +78,7 @@ public class StockController {
         log.info("StockController -> méthode deleteStock : sortie ");
     }
 
+    @ApiOperation(value = "Met à jour un stock si celui-ci est conforme")
     @PutMapping(value="/stocks", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Stock updateStock(@Valid @RequestBody Stock stock){
         log.info("StockController -> méthode updateStock : entrée ");
@@ -81,6 +89,7 @@ public class StockController {
         return stockUpdate;
     }
 
+    @ApiOperation(value = "Récupère tous les stocks pour l'id d'un produit")
     @GetMapping(value = "/stocks/product/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Stock> listStockByProductById(@PathVariable int id){
         log.info("StockController -> méthode listStockByProducerById : entrée ");
