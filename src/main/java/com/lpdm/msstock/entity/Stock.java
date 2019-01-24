@@ -1,6 +1,9 @@
 package com.lpdm.msstock.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -12,21 +15,29 @@ public class Stock {
     private Integer id;
 
     @Column
+    @NotNull(message = "la quantité ne peut être null")
+    @Min(value = 1,message = "La quantité ne peut être à 0")
     private Integer quantity;
 
     @Column(name="expire_date")
+    @NotNull(message = "la date d'expiration ne peut être null")
+    @Future(message = "la date d'expiration ne peut être antérieure à la date du jour")
     private LocalDate expireDate;
 
     @Column
+    @NotNull(message = "le packaging ne peut être null")
     private String packaging;
 
     @Column(name="unit_by_package")
+    @NotNull(message = "la quantité dans un package ne peut être null")
     private Integer unitByPackage;
 
     @Column(name="product_id")
+    @NotNull(message = "la référence produit ne peut être null")
     private Integer productId;
 
     @Column
+    @NotNull(message = "la description ne peut être null")
     private String description;
 
     public Integer getId() {

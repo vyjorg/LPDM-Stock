@@ -2,12 +2,14 @@ package com.lpdm.msstock.controller;
 
 import com.lpdm.msstock.dao.StockDao;
 import com.lpdm.msstock.entity.Stock;
+import com.lpdm.msstock.exception.StockNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,7 +23,11 @@ public class StockController {
     public List<Stock> listStock(){
         log.info("StockController -> méthode listStock : entrée ");
         List<Stock> list = stockDao.findAll();
-        log.debug("StockController -> méthode listStock : test list vide = "+list.size());
+
+        if(list.size()==0){
+            log.warn("StockController -> méthode listStock : list vide ");
+            throw new StockNotFound("Aucun stock trouvé dans la base de données");
+        }
 
         log.info("StockController -> méthode listStock : sortie ");
         return list;
@@ -33,12 +39,17 @@ public class StockController {
         log.info("StockController -> méthode findStockById : id envoyé = "+id);
         Stock stock = stockDao.findById(id);
 
+        if(stock == null){
+            log.warn("StockController -> méthode findStockById : stock null ");
+            throw new StockNotFound("Aucun stock trouvé pour l'id = "+id);
+        }
+
         log.info("StockController -> méthode findStockById : sortie ");
         return stock;
     }
 
     @PostMapping(value = "/stocks", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Stock addStock(@RequestBody Stock stock){
+    public Stock addStock(@Valid @RequestBody Stock stock){
         log.info("StockController -> méthode addStock : entrée ");
         log.info("StockController -> méthode addStock : stock reçu = "+stock.toString());
 
@@ -61,7 +72,7 @@ public class StockController {
     }
 
     @PutMapping(value="/stocks", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Stock updateStock(@RequestBody Stock stock){
+    public Stock updateStock(@Valid @RequestBody Stock stock){
         log.info("StockController -> méthode updateStock : entrée ");
         log.info("StockController -> méthode updateStock : stock reçu = "+stock.toString());
         Stock stockUpdate = stockDao.save(stock);
