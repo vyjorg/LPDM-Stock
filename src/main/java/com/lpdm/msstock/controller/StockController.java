@@ -14,6 +14,12 @@ import org.apache.logging.log4j.Logger;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * @author Vianney
+ * @version 1.0
+ * @since 01/12/2018
+ */
+
 @Api(description="Controller pour les opérations CRUD sur les stocks.")
 @RestController
 public class StockController {
@@ -22,6 +28,10 @@ public class StockController {
     @Autowired
     private StockDao stockDao;
 
+    /**
+     * Call this method to get an {@link List<Stock>}
+     * @return An {@link List<Stock>} json object
+     */
     @ApiOperation(value = "Récupère tous les stocks de la bdd")
     @GetMapping(value = "/stocks", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Stock> listStock(){
@@ -37,6 +47,12 @@ public class StockController {
         return list;
     }
 
+
+    /**
+     * Find {@link Stock} by the stock {@link Integer} id
+     * @param id The {@link Stock} {@link Integer} id
+     * @return an {@link Stock} json object
+     */
     @ApiOperation(value = "Récupère un stock grâce à son ID si celui-ci existe dans la bdd")
     @GetMapping(value="/stocks/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Stock findStockById(@PathVariable int id){
@@ -53,6 +69,11 @@ public class StockController {
         return stock;
     }
 
+    /**
+     * Add {@link Stock} in database
+     * @param {@link Stock} stock
+     * @return an {@link Stock} added json object
+     */
     @ApiOperation(value = "Enregistre un stock si celui-ci est conforme")
     @PostMapping(value = "/stocks", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Stock addStock(@Valid @RequestBody Stock stock){
@@ -69,6 +90,10 @@ public class StockController {
         return stockAdded;
     }
 
+    /**
+     * Delete {@link Stock} by the stock {@link Integer} id
+     * @param id The {@link Stock} {@link Integer} id
+     */
     @ApiOperation(value = "Supprime un stock grâce à son ID si celui-ci existe dans la bdd")
     @DeleteMapping(value="/stocks/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void deleteStock(@PathVariable int id){
@@ -78,6 +103,11 @@ public class StockController {
         log.info("StockController -> méthode deleteStock : sortie ");
     }
 
+    /**
+     * Update {@link Stock} in database
+     * @param {@link Stock} stock
+     * @return an {@link Stock} updated json object
+     */
     @ApiOperation(value = "Met à jour un stock si celui-ci est conforme")
     @PutMapping(value="/stocks", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Stock updateStock(@Valid @RequestBody Stock stock){
@@ -89,6 +119,12 @@ public class StockController {
         return stockUpdate;
     }
 
+
+    /**
+     * Find {@link List<Stock>} by the product {@link Integer} id
+     * @param id The Product {@link Integer} id
+     * @return an {@link List<Stock>} list json object
+     */
     @ApiOperation(value = "Récupère tous les stocks pour l'id d'un produit")
     @GetMapping(value = "/stocks/product/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Stock> listStockByProductById(@PathVariable int id){
