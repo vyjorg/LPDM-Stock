@@ -2,6 +2,7 @@ package com.lpdm.msstock.controller;
 
 import com.lpdm.msstock.dao.StockDao;
 import com.lpdm.msstock.entity.Stock;
+import com.lpdm.msstock.exception.DeleteStockException;
 import com.lpdm.msstock.exception.StockNotFound;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -99,7 +100,10 @@ public class StockController {
     public void deleteStock(@PathVariable int id){
         log.info("StockController -> méthode deleteStock : entrée ");
         log.info("StockController -> méthode deleteStock : id envoyé = "+id);
-        stockDao.deleteById(id);
+       try{ stockDao.deleteById(id);}
+       catch (Exception e){
+           throw new DeleteStockException("Une erreur s'est produite lors de la suppression du stock avec l'id = "+id);
+       }
         log.info("StockController -> méthode deleteStock : sortie ");
     }
 
